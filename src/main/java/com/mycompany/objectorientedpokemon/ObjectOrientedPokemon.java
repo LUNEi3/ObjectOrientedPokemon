@@ -4,7 +4,7 @@
 
 package com.mycompany.objectorientedpokemon;
 
-import com.mycompany.objectorientedpokemon.map.GamePanel;
+import com.mycompany.objectorientedpokemon.map.MapPanel;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -22,9 +22,12 @@ public class ObjectOrientedPokemon {
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setLocationRelativeTo(null);
         
-        GamePanel map = new GamePanel();
+        MapPanel map = new MapPanel();
         main.add(map);
         main.pack();
+        
+//        System.out.println(main.getSize());
+//        System.out.println(map.getSize());
         
         main.setVisible(true);
     }
