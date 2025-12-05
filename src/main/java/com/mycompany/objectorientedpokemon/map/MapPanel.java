@@ -5,6 +5,8 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.map.entity.Player;
+import com.mycompany.objectorientedpokemon.map.tile.TileManager;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,21 +16,21 @@ import java.awt.Graphics2D;
  *
  * @author User
  */
-public class GamePanel extends javax.swing.JPanel implements Runnable {
+public class MapPanel extends javax.swing.JPanel implements Runnable {
     
-    // Temp variable
-    private int playerX = 100, playerY = 100, speed = 4;
-    
-    private KeyHandler keyH = new KeyHandler();
     private boolean isStopped;
     private Thread gameThread;
+    private KeyHandler keyH = new KeyHandler();
+    private TileManager tileM = new TileManager(this);
+    public Player player = new Player(this, keyH);
+
     
     /**
      * Creates new form GamePanel
      */
-    public GamePanel() {
+    public MapPanel() {
         initComponents();
-        this.setBackground(Color.black);
+        this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT));
         
@@ -79,7 +81,11 @@ public class GamePanel extends javax.swing.JPanel implements Runnable {
         isStopped = true;
         System.exit(0);
     }//GEN-LAST:event_btnStopMouseClicked
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnStop;
+    // End of variables declaration//GEN-END:variables
 
+    
     @Override
     public void addNotify() {
         super.addNotify();
@@ -99,14 +105,14 @@ public class GamePanel extends javax.swing.JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currentTime;
         
-        while (gameThread != null) { // Check gameThread, not just true
+        while (gameThread != null) { 
 
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
 
             if (delta >= 1) {
-                if (!isStopped) { // Only update/repaint if not stopped
+                if (!isStopped) {
                     update();
                     repaint();
                 }
@@ -124,23 +130,10 @@ public class GamePanel extends javax.swing.JPanel implements Runnable {
         gameThread = new Thread(this);
         gameThread.start();
     }
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnStop;
-    // End of variables declaration//GEN-END:variables
-
+    
     private void update() {
 //        System.out.println("Update() is running...");
-        if (keyH.upPressed) {
-            playerY -= speed;
-        } else if (keyH.downPressed) {
-            playerY += speed;
-        } else if (keyH.rightPressed) {
-            playerX += speed;
-        } else if (keyH.leftPressed) {
-            playerX -= speed;
-        }
+        player.update();
     }
     
     protected void paintComponent(Graphics g) {
@@ -148,9 +141,9 @@ public class GamePanel extends javax.swing.JPanel implements Runnable {
 //        System.out.println("repaint() is running...");
         
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.red);
-        g2.fillRect(playerX, playerY, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE);
         
-        g2.dispose();
+        tileM.draw(g2);
+        player.draw(g2);
+
     }
 }
