@@ -17,4 +17,10 @@ public class GameConstants {
     final static public int MAX_SCREEN_ROW = 9;
     final static public int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     final static public int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW;
+    
+    // WORLD MAP
+    final static public int MAX_WORLD_COL = 60;
+    final static public int MAX_WORLD_ROW = 40;
+    final static public int WORLD_WIDTH = TILE_SIZE + MAX_WORLD_COL;
+    final static public int WORLD_HEIGHT = TILE_SIZE + MAX_WORLD_ROW;
 }
