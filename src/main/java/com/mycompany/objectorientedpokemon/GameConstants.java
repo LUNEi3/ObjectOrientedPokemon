@@ -21,6 +21,6 @@ public class GameConstants {
     // WORLD MAP
     final static public int MAX_WORLD_COL = 60;
     final static public int MAX_WORLD_ROW = 40;
-    final static public int WORLD_WIDTH = TILE_SIZE + MAX_WORLD_COL;
-    final static public int WORLD_HEIGHT = TILE_SIZE + MAX_WORLD_ROW;
+    final static public int WORLD_WIDTH = TILE_SIZE * MAX_WORLD_COL;
+    final static public int WORLD_HEIGHT = TILE_SIZE * MAX_WORLD_ROW;
 }
