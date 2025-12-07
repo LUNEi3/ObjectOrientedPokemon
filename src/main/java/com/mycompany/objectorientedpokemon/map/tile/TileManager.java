@@ -92,7 +92,34 @@ public class TileManager {
             int screenX = worldX - mp.player.worldX + mp.player.screenX;
             int screenY = worldY - mp.player.worldY + mp.player.screenY;
             
+            
+            // Render only things on map
+            if (mp.player.worldX < mp.player.screenX) {
+                screenX = worldX;
+            }
+            if (mp.player.worldY < mp.player.screenY) {
+                screenY = worldY;
+            }
+
+            int rightOffset = GameConstants.SCREEN_WIDTH - mp.player.screenX;
+            int bottomOffset = GameConstants.SCREEN_HEIGHT - mp.player.screenY;
+
+            if (mp.player.worldX > GameConstants.WORLD_WIDTH - rightOffset) {
+                screenX = GameConstants.SCREEN_WIDTH - (GameConstants.WORLD_WIDTH - worldX);
+            }
+            if (mp.player.worldY > GameConstants.WORLD_HEIGHT - bottomOffset) {
+                screenY = GameConstants.SCREEN_HEIGHT - (GameConstants.WORLD_HEIGHT - worldY);
+            }
+            
+            
+            // Render if tile on the player screen
+            if (screenX + GameConstants.TILE_SIZE > 0 &&
+            screenX < GameConstants.SCREEN_WIDTH &&
+            screenY + GameConstants.TILE_SIZE > 0 &&
+            screenY < GameConstants.SCREEN_HEIGHT) {
+
             g2.drawImage(tiles[tileNum].image, screenX, screenY, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE, null);
+        }
             worldCol ++;
             
             if(worldCol >= GameConstants.MAX_WORLD_COL) {

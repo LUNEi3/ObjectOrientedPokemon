@@ -19,7 +19,7 @@ public class Player extends Entity {
     private MapPanel mp;
     private KeyHandler keyH;
     
-    public final int screenX, screenY;
+    public int screenX, screenY;
     
     public Player(MapPanel mp, KeyHandler keyH) {
         this.mp = mp;
@@ -113,6 +113,27 @@ public class Player extends Entity {
             }   
         }
         
-        g2.drawImage(image, screenX, screenY, (int) (GameConstants.TILE_SIZE), (int) (GameConstants.TILE_SIZE), null);
+        // Change player position when encounter the edge of map
+        int drawX = screenX;
+        int drawY = screenY;
+        
+        if (worldX < screenX) {
+            drawX = worldX;
+        }
+        if (worldY < screenY) {
+            drawY = worldY;
+        }
+        
+        int rightOffset = GameConstants.SCREEN_WIDTH - screenX;
+        int bottomOffset = GameConstants.SCREEN_HEIGHT - screenY;
+
+        if (worldX > GameConstants.WORLD_WIDTH - rightOffset) {
+            drawX = GameConstants.SCREEN_WIDTH - (GameConstants.WORLD_WIDTH - worldX);
+        }
+        if (worldY > GameConstants.WORLD_HEIGHT - bottomOffset) {
+            drawY = GameConstants.SCREEN_HEIGHT - (GameConstants.WORLD_HEIGHT - worldY);
+        }
+        
+        g2.drawImage(image, drawX, drawY, (int) (GameConstants.TILE_SIZE), (int) (GameConstants.TILE_SIZE), null);
     }
 }
