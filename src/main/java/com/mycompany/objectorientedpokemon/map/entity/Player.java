@@ -8,6 +8,7 @@ import com.mycompany.objectorientedpokemon.GameConstants;
 import com.mycompany.objectorientedpokemon.map.MapPanel;
 import com.mycompany.objectorientedpokemon.map.KeyHandler;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
@@ -28,13 +29,19 @@ public class Player extends Entity {
         screenX = GameConstants.SCREEN_WIDTH / 2 - (GameConstants.TILE_SIZE / 2);
         screenY = GameConstants.SCREEN_HEIGHT / 2 - (GameConstants.TILE_SIZE / 2);
         
+        solidArea = new Rectangle();
+        solidArea.x = 20;
+        solidArea.y = GameConstants.TILE_SIZE / 2;
+        solidArea.width = 40;
+        solidArea.height = 40;
+        
         setDefaultValues();
         getPlayerImage();
     }
     
     private void setDefaultValues() {
-        worldX = GameConstants.TILE_SIZE * 2;
-        worldY = GameConstants.TILE_SIZE * 2;
+        worldX = GameConstants.TILE_SIZE * 25;
+        worldY = GameConstants.TILE_SIZE * 10;
         speed = 4;
         direction = "right";
     }
@@ -56,18 +63,39 @@ public class Player extends Entity {
         if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
                 direction = "up";
-                worldY -= speed;
             } else if (keyH.downPressed) {
                 direction = "down";
-                worldY += speed;
             } else if (keyH.leftPressed) {
                 direction = "left";
-                worldX -= speed;
             } else if (keyH.rightPressed) {
                 direction = "right";
-                worldX += speed;
             }
 
+            // RESET COLLISION
+            collisionOn = false;
+            mp.cChecker.CheckTile(this);
+            
+            if (!collisionOn) {
+                switch (direction) {
+                    case "up" -> {
+                        worldY -= speed;
+                        break;
+                    }
+                    case "down" -> {
+                        worldY += speed;
+                        break;
+                    }
+                    case "left" -> {
+                        worldX -= speed;
+                        break;
+                    }
+                    case "right" -> {
+                        worldX += speed;
+                        break;
+                    }
+                }
+            }
+            
             spriteCounter ++;
             if (spriteCounter > 10) {
                 swapSprite = !swapSprite;

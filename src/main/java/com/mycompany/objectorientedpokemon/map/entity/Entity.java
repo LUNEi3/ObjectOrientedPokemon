@@ -4,6 +4,7 @@
  */
 package com.mycompany.objectorientedpokemon.map.entity;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -14,7 +15,9 @@ public class Entity {
     public int worldX, worldY, speed;
     
     protected BufferedImage right1, right2, left1, left2;
-    protected String direction;
+    public String direction;
     protected int spriteCounter;
     protected boolean swapSprite = false;
+    public Rectangle solidArea;
+    public boolean collisionOn = false;
 }

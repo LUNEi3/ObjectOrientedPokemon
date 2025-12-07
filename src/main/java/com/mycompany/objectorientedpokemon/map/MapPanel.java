@@ -21,7 +21,8 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     private boolean isStopped;
     private Thread gameThread;
     private KeyHandler keyH = new KeyHandler();
-    private TileManager tileM = new TileManager(this);
+    public TileManager tileM = new TileManager(this);
+    public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
 
     

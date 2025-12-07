@@ -20,8 +20,8 @@ import javax.imageio.ImageIO;
 public class TileManager {
     
     private MapPanel mp;
-    private Tile[] tiles;
-    private int mapTileNum[][];
+    public Tile[] tiles;
+    public int mapTileNum[][];
     
     public TileManager(MapPanel mp) {
         this.mp = mp;
@@ -38,12 +38,15 @@ public class TileManager {
             
             tiles[1] = new Tile();
             tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.jpeg"));
+            tiles[1].collision = true;
             
             tiles[2] = new Tile();
             tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
+            tiles[2].collision = true;
             
             tiles[3] = new Tile();
             tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
+            tiles[3].collision = true;
             
             tiles[4] = new Tile();
             tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wooden.png"));
