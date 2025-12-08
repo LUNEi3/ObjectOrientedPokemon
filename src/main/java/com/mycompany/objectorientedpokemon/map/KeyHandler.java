@@ -62,4 +62,11 @@ public class KeyHandler implements KeyListener {
         }
     }
     
+    public void releaseAll() {
+        upPressed = false;
+        downPressed = false;
+        leftPressed = false;
+        rightPressed = false;
+    }
+    
 }
