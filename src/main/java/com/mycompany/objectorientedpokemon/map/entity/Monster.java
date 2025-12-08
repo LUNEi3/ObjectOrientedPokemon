@@ -22,7 +22,7 @@ public class Monster extends Entity {
         
         direction = "down";
         speed = 1;
-        solidArea = new Rectangle(20, GameConstants.TILE_SIZE / 2, 40, 40);
+        solidArea = new Rectangle(20, GameConstants.TILE_SIZE, 40, 40);
         
         getImage();
     }
@@ -35,17 +35,28 @@ public class Monster extends Entity {
         int screenX = worldX - mp.player.worldX + mp.player.screenX;
         int screenY = worldY - mp.player.worldY + mp.player.screenY;
         
-        if (screenX + GameConstants.TILE_SIZE > 0 &&
-            screenX < GameConstants.SCREEN_WIDTH &&
-            screenY + GameConstants.TILE_SIZE > 0 &&
-            screenY < GameConstants.SCREEN_HEIGHT) {
-
-            if (swapSprite) {
-                g2.drawImage(image1, screenX, screenY, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE, null);
-            } else {
-                g2.drawImage(image2, screenX, screenY, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE, null);
-            }
+        if (mp.player.worldX < mp.player.screenX) {
+            screenX = worldX;
         }
+        if (mp.player.worldY < mp.player.screenY) {
+            screenY = worldY;
+        }
+        int rightOffset = GameConstants.SCREEN_WIDTH - mp.player.screenX;
+        int bottomOffset = GameConstants.SCREEN_HEIGHT - mp.player.screenY;
+
+        if (mp.player.worldX > GameConstants.WORLD_WIDTH - rightOffset) {
+            screenX = GameConstants.SCREEN_WIDTH - (GameConstants.WORLD_WIDTH - worldX);
+        }
+        if (mp.player.worldY > GameConstants.WORLD_HEIGHT - bottomOffset) {
+            screenY = GameConstants.SCREEN_HEIGHT - (GameConstants.WORLD_HEIGHT - worldY);
+        }
+
+        if (swapSprite) {
+            g2.drawImage(image1, screenX, screenY, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE, null);
+        } else {
+            g2.drawImage(image2, screenX, screenY, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE, null);
+        }
+
         
         spriteCounter++;
         if (spriteCounter > 10) {
