@@ -19,11 +19,13 @@ import java.awt.Graphics2D;
 public class MapPanel extends javax.swing.JPanel implements Runnable {
     
     private boolean isStopped;
+    public boolean gameStateOn = true;
     private Thread gameThread;
-    private KeyHandler keyH = new KeyHandler();
+    private KeyHandler keyH = new KeyHandler(this);
     public TileManager tileM = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this, keyH);
+    public UiMap ui = new UiMap(this);
 
     
     /**
@@ -134,7 +136,11 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     
     private void update() {
 //        System.out.println("Update() is running...");
-        player.update();
+        if (gameStateOn) {
+            player.update();
+        } else {
+            //
+        }
     }
     
     protected void paintComponent(Graphics g) {
@@ -145,6 +151,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         tileM.draw(g2);
         player.draw(g2);
+        ui.draw(g2);
 
     }
 }
