@@ -5,6 +5,8 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.map.entity.Entity;
+import com.mycompany.objectorientedpokemon.map.entity.Monster;
 import com.mycompany.objectorientedpokemon.map.entity.Player;
 import com.mycompany.objectorientedpokemon.map.tile.TileManager;
 import java.awt.Color;
@@ -18,14 +20,19 @@ import java.awt.Graphics2D;
  */
 public class MapPanel extends javax.swing.JPanel implements Runnable {
     
+    // SYSTEM
     private boolean isStopped;
-    public boolean gameStateOn = true;
+    public boolean gameStateOn;
     private Thread gameThread;
-    private KeyHandler keyH = new KeyHandler(this);
+    public KeyHandler keyH = new KeyHandler(this);
     public TileManager tileM = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
-    public Player player = new Player(this, keyH);
     public UiMap ui = new UiMap(this);
+    public AssetSetter aSetter = new AssetSetter(this);
+    
+    // ENTITY
+    public Player player = new Player(this, keyH);
+    public Monster monster[] = new Monster[10];
 
     
     /**
@@ -99,6 +106,8 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         }
         
         this.requestFocusInWindow();
+        gameStateOn = true;
+        aSetter.setMonster();
     }
     
     @Override
@@ -151,6 +160,13 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         tileM.draw(g2);
         player.draw(g2);
+        
+        for (Monster elem : monster) {
+            if (elem != null) {
+                elem.draw(g2);
+            }
+        }
+        
         ui.draw(g2);
 
     }

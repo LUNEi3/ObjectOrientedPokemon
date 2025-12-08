@@ -6,6 +6,7 @@ package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
 import com.mycompany.objectorientedpokemon.map.entity.Entity;
+import java.awt.Rectangle;
 
 /**
  *
@@ -19,7 +20,7 @@ public class CollisionChecker {
         
     }
     
-    public void CheckTile(Entity en) {
+    public void checkTileCollision(Entity en) {
         int enLeftX = en.worldX + en.solidArea.x;
         int enRightX = en.worldX + en.solidArea.x + en.solidArea.width;
         int enTopY = en.worldY + en.solidArea.y;
@@ -66,5 +67,35 @@ public class CollisionChecker {
                 }
             }
         }
+    }
+    
+    public int checkMonsterCollision(Entity player, Entity targets[]) {
+        int index = 999 ;
+        
+        for (int i = 0; i < targets.length; i++) {
+            if (targets[i] != null) {
+                
+                player.solidArea.x = player.worldX + player.solidArea.x;
+                player.solidArea.y = player.worldY + player.solidArea.y;
+
+                // 2. Get the target's solid area position
+                targets[i].solidArea.x = targets[i].worldX + targets[i].solidArea.x;
+                targets[i].solidArea.y = targets[i].worldY + targets[i].solidArea.y;
+                
+                if(player.solidArea.intersects(targets[i].solidArea)) {
+                    player.collisionOn = true;
+                    index = i;
+                }
+                
+                player.solidArea.x = player.solidAreaDefaultX;
+                player.solidArea.y = player.solidAreaDefaultY;
+
+                targets[i].solidArea.x = targets[i].solidAreaDefaultX;
+                targets[i].solidArea.y = targets[i].solidAreaDefaultY;
+                
+            }
+        }
+        
+        return index;
     }
 }

@@ -10,7 +10,7 @@ import com.mycompany.objectorientedpokemon.map.KeyHandler;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,21 +19,20 @@ import javax.imageio.ImageIO;
 public class Player extends Entity {
     private MapPanel mp;
     private KeyHandler keyH;
-    
     public int screenX, screenY;
     
     public Player(MapPanel mp, KeyHandler keyH) {
+        super(mp);
         this.mp = mp;
         this.keyH = keyH;
         
         screenX = GameConstants.SCREEN_WIDTH / 2 - (GameConstants.TILE_SIZE / 2);
         screenY = GameConstants.SCREEN_HEIGHT / 2 - (GameConstants.TILE_SIZE / 2);
         
-        solidArea = new Rectangle();
-        solidArea.x = 20;
-        solidArea.y = GameConstants.TILE_SIZE / 2;
-        solidArea.width = 40;
-        solidArea.height = 40;
+        solidArea = new Rectangle(20, GameConstants.TILE_SIZE / 2, 40, 40);
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
         
         setDefaultValues();
         getPlayerImage();
@@ -47,15 +46,10 @@ public class Player extends Entity {
     }
     
     private void getPlayerImage() {
-        try {
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/right2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/left1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/left2.png"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        right1 = setup("/player/right1");
+        right2 = setup("/player/right2");
+        left1 = setup("/player/left1");
+        left2 = setup("/player/left2");
     } 
     
     public void update() {
@@ -73,7 +67,13 @@ public class Player extends Entity {
 
             // RESET COLLISION
             collisionOn = false;
-            mp.cChecker.CheckTile(this);
+            mp.cChecker.checkTileCollision(this);
+            
+
+            // Check if Player encounter Monster
+            int monsterIndex = mp.cChecker.checkMonsterCollision(this, mp.monster);
+            encounterMonster(monsterIndex);
+
             
             if (!collisionOn) {
                 switch (direction) {
@@ -101,6 +101,8 @@ public class Player extends Entity {
                 swapSprite = !swapSprite;
                 spriteCounter = 0;
             }
+            
+            
         }
     }
     
@@ -163,5 +165,15 @@ public class Player extends Entity {
         }
         
         g2.drawImage(image, drawX, drawY, (int) (GameConstants.TILE_SIZE), (int) (GameConstants.TILE_SIZE), null);
+    }
+
+    private void encounterMonster(int index) {
+        String text = "You encouter Monster[" + index +"]";
+        if (index != 999) {
+            JOptionPane.showMessageDialog(null, text, "Title", JOptionPane.PLAIN_MESSAGE);
+            mp.monster[index] = null;
+            mp.keyH.releaseAll();
+        }
+
     }
 }
