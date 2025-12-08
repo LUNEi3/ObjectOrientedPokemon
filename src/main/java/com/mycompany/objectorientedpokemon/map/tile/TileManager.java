@@ -6,6 +6,7 @@ package com.mycompany.objectorientedpokemon.map.tile;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
 import com.mycompany.objectorientedpokemon.map.MapPanel;
+import com.mycompany.objectorientedpokemon.map.Util;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -32,26 +33,25 @@ public class TileManager {
     }
     
     private void getTileImage() {
+        setup(0, "grass", false);
+        setup(2, "water", true);
+        setup(3, "tree", true);
+        setup(4, "wooden", false);
+    }
+    
+    private void setup(int index, String path, boolean collision) {
+        Util util = new Util();
+        
         try {
-            tiles[0] = new Tile();
-            tiles[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
+            tiles[index] = new Tile();
+            tiles[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/" + path + ".png"));
             
-            tiles[1] = new Tile();
-            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wall.jpeg"));
-            tiles[1].collision = true;
+            // Optimize Image scale
+            // tiles[index].image = util.scaleImage(tiles[index].image, GameConstants.TILE_SIZE, GameConstants.TILE_SIZE);
             
-            tiles[2] = new Tile();
-            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/water.png"));
-            tiles[2].collision = true;
+            tiles[index].collision = collision;
             
-            tiles[3] = new Tile();
-            tiles[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/tree.png"));
-            tiles[3].collision = true;
-            
-            tiles[4] = new Tile();
-            tiles[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/wooden.png"));
-            
-        } catch (Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
