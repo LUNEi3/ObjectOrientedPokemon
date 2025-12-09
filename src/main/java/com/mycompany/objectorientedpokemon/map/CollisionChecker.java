@@ -17,56 +17,56 @@ public class CollisionChecker {
     
     public CollisionChecker(MapPanel mp) {
         this.mp = mp;
-        
     }
     
     public void checkTileCollision(Entity en) {
-        int enLeftX = en.worldX + en.solidArea.x;
-        int enRightX = en.worldX + en.solidArea.x + en.solidArea.width;
-        int enTopY = en.worldY + en.solidArea.y;
+        int enLeftX   = en.worldX + en.solidArea.x;
+        int enRightX  = en.worldX + en.solidArea.x + en.solidArea.width;
+        int enTopY    = en.worldY + en.solidArea.y;
         int enBottomY = en.worldY + en.solidArea.y + en.solidArea.height;
-        
-        int enLeftCol = enLeftX / GameConstants.TILE_SIZE;
-        int enRightCol = enRightX / GameConstants.TILE_SIZE;
-        int enTopRow = enTopY / GameConstants.TILE_SIZE;
+
+        int enLeftCol   = enLeftX / GameConstants.TILE_SIZE;
+        int enRightCol  = enRightX / GameConstants.TILE_SIZE;
+        int enTopRow    = enTopY / GameConstants.TILE_SIZE;
         int enBottomRow = enBottomY / GameConstants.TILE_SIZE;
-        
-        int tile1, tile2;
-        
+
         switch (en.direction) {
             case "up" -> {
-                enTopRow = (enTopY - en.speed) / GameConstants.TILE_SIZE;
-                tile1 = mp.tileM.mapTileNum[enLeftCol][enTopRow];
-                tile2 = mp.tileM.mapTileNum[enRightCol][enTopRow];
-                if (mp.tileM.tiles[tile1].collision || mp.tileM.tiles[tile2].collision) {
+                int futureRow = (enTopY - en.speed) / GameConstants.TILE_SIZE;
+                if (isTileSolid(enLeftCol, futureRow) || isTileSolid(enRightCol, futureRow)) {
                     en.collisionOn = true;
                 }
             }
             case "down" -> {
-                enBottomRow = (enBottomY - en.speed) / GameConstants.TILE_SIZE;
-                tile1 = mp.tileM.mapTileNum[enLeftCol][enBottomRow];
-                tile2 = mp.tileM.mapTileNum[enRightCol][enBottomRow];
-                if (mp.tileM.tiles[tile1].collision || mp.tileM.tiles[tile2].collision) {
+                int futureRow = (enBottomY + en.speed) / GameConstants.TILE_SIZE;
+                if (isTileSolid(enLeftCol, futureRow) || isTileSolid(enRightCol, futureRow)) {
                     en.collisionOn = true;
                 }
             }
             case "left" -> {
-                enLeftCol = (enLeftX - en.speed) / GameConstants.TILE_SIZE;
-                tile1 = mp.tileM.mapTileNum[enLeftCol][enTopRow];
-                tile2 = mp.tileM.mapTileNum[enLeftCol][enBottomRow];
-                if (mp.tileM.tiles[tile1].collision || mp.tileM.tiles[tile2].collision) {
+                int futureCol = (enLeftX - en.speed) / GameConstants.TILE_SIZE;
+                if (isTileSolid(futureCol, enTopRow) || isTileSolid(futureCol, enBottomRow)) {
                     en.collisionOn = true;
                 }
             }
             case "right" -> {
-                enRightCol = (enRightX - en.speed) / GameConstants.TILE_SIZE;
-                tile1 = mp.tileM.mapTileNum[enRightCol][enTopRow];
-                tile2 = mp.tileM.mapTileNum[enRightCol][enBottomRow];
-                if (mp.tileM.tiles[tile1].collision || mp.tileM.tiles[tile2].collision) {
+                int futureCol = (enRightX + en.speed) / GameConstants.TILE_SIZE;
+                if (isTileSolid(futureCol, enTopRow) || isTileSolid(futureCol, enBottomRow)) {
                     en.collisionOn = true;
                 }
             }
         }
+    }
+
+    private boolean isTileSolid(int col, int row) {
+        // Check: Is the coordinate outside the map
+        if (col < 0 || col >= GameConstants.MAX_WORLD_COL || 
+            row < 0 || row >= GameConstants.MAX_WORLD_ROW) {
+            return true;
+        }
+        int tileNum = mp.tileM.mapTileNum[col][row];
+
+        return mp.tileM.tiles[tileNum].collision;
     }
     
     public int checkMonsterCollision(Entity player, Entity targets[]) {
@@ -78,7 +78,6 @@ public class CollisionChecker {
                 player.solidArea.x = player.worldX + player.solidArea.x;
                 player.solidArea.y = player.worldY + player.solidArea.y;
 
-                // 2. Get the target's solid area position
                 targets[i].solidArea.x = targets[i].worldX + targets[i].solidArea.x;
                 targets[i].solidArea.y = targets[i].worldY + targets[i].solidArea.y;
                 
