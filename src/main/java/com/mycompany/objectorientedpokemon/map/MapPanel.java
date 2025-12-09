@@ -29,6 +29,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     public CollisionChecker cChecker = new CollisionChecker(this);
     public UiMap ui = new UiMap(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public EventHandler eHandler = new EventHandler(this);
     
     // ENTITY
     public Player player = new Player(this, keyH);
@@ -107,7 +108,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         this.requestFocusInWindow();
         gameStateOn = true;
-        aSetter.setMonster();
+        aSetter.setMonster(5);
     }
     
     @Override

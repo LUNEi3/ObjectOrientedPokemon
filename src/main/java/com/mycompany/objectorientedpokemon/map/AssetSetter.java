@@ -20,8 +20,8 @@ public class AssetSetter {
         this.mp = mp;
     }
     
-    public void setMonster() {
-        for (int i = 0; i < 5; i++) {
+    public void setMonster(int numMonster) {
+        for (int i = 0; i < numMonster; i++) {
             mp.monster[i] = new Monster(mp);
             int[] coords = getXYMonsterSpawn();
             

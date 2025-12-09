@@ -39,8 +39,8 @@ public class Player extends Entity {
     }
     
     private void setDefaultValues() {
-        worldX = GameConstants.TILE_SIZE * 25;
-        worldY = GameConstants.TILE_SIZE * 10;
+        worldX = GameConstants.TILE_SIZE * 15;
+        worldY = GameConstants.TILE_SIZE * 35;
         speed = 4;
         direction = "right";
     }
@@ -69,6 +69,8 @@ public class Player extends Entity {
             collisionOn = false;
             mp.cChecker.checkTileCollision(this);
             
+            // Check Event
+            mp.eHandler.checkEvent();
 
             // Check if Player encounter Monster
             int monsterIndex = mp.cChecker.checkMonsterCollision(this, mp.monster);
