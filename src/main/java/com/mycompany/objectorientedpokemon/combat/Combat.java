@@ -9,5 +9,5 @@ package com.mycompany.objectorientedpokemon.map.combat;
  * @author User
  */
 public class Combat {
-    Adlakd;bva'kb]-akb]aebka]
+    //
 }
