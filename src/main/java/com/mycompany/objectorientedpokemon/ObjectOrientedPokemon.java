@@ -5,6 +5,7 @@
 package com.mycompany.objectorientedpokemon;
 
 import com.mycompany.objectorientedpokemon.map.MapPanel;
+import com.mycompany.objectorientedpokemon.menu.*;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -13,22 +14,21 @@ import javax.swing.JFrame;
  * @author pariwat.nira
  */
 public class ObjectOrientedPokemon {
-    private static Dimension preferredSize = new Dimension(1280, 720);
 
     public static void main(String[] args) {
-        JFrame main = new JFrame();
+        // SYSTEM
+        GameManager manager = new GameManager();
+        MainFrame main = new MainFrame();
+        
+        // SETUP
         main.setResizable(false);
-        // main.setPreferredSize(preferredSize);
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         main.setLocationRelativeTo(null);
-        
-        MapPanel map = new MapPanel();
-        main.add(map);
+        main.setTitle("Obeject-Oriented-Pokemon (Working...)");
+  
+        // HANDLE
+        main.add(manager.getPanel());
         main.pack();
-        
-//        System.out.println(main.getSize());
-//        System.out.println(map.getSize());
-        
         main.setVisible(true);
     }
 }
