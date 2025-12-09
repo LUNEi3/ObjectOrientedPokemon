@@ -5,7 +5,7 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
-import com.mycompany.objectorientedpokemon.map.entity.Entity;
+import com.mycompany.objectorientedpokemon.map.mapEntity.Entity;
 import java.awt.Rectangle;
 
 /**

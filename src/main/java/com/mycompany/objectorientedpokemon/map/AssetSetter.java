@@ -5,7 +5,7 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
-import com.mycompany.objectorientedpokemon.map.entity.Monster;
+import com.mycompany.objectorientedpokemon.map.mapEntity.Monster;
 import java.util.Random;
 
 /**

@@ -5,9 +5,9 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
-import com.mycompany.objectorientedpokemon.map.entity.Entity;
-import com.mycompany.objectorientedpokemon.map.entity.Monster;
-import com.mycompany.objectorientedpokemon.map.entity.Player;
+import com.mycompany.objectorientedpokemon.map.mapEntity.Entity;
+import com.mycompany.objectorientedpokemon.map.mapEntity.Monster;
+import com.mycompany.objectorientedpokemon.map.mapEntity.Player;
 import com.mycompany.objectorientedpokemon.map.tile.TileManager;
 import java.awt.Color;
 import java.awt.Dimension;
