@@ -65,7 +65,7 @@ public class EventHandler {
         mp.tileM.loadMap(mapPath);
         System.out.println(mapPath);
         
-        // 2. Move Player
+        // 2. Move MapPlayer
         mp.player.worldX = GameConstants.TILE_SIZE * col;
         mp.player.worldY = GameConstants.TILE_SIZE * row;
         

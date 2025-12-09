@@ -14,10 +14,10 @@ import java.awt.image.BufferedImage;
  *
  * @author User
  */
-public class Monster extends Entity {
+public class MapMonster extends MapEntity {
     private BufferedImage image1, image2;
     
-    public Monster(MapPanel mp) {
+    public MapMonster(MapPanel mp) {
         super(mp);
         
         direction = "down";

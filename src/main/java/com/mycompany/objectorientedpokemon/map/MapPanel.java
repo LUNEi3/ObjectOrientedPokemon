@@ -5,9 +5,9 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
-import com.mycompany.objectorientedpokemon.map.mapEntity.Entity;
-import com.mycompany.objectorientedpokemon.map.mapEntity.Monster;
-import com.mycompany.objectorientedpokemon.map.mapEntity.Player;
+import com.mycompany.objectorientedpokemon.map.mapEntity.MapEntity;
+import com.mycompany.objectorientedpokemon.map.mapEntity.MapMonster;
+import com.mycompany.objectorientedpokemon.map.mapEntity.MapPlayer;
 import com.mycompany.objectorientedpokemon.map.tile.TileManager;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,8 +32,8 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     public EventHandler eHandler = new EventHandler(this);
     
     // ENTITY
-    public Player player = new Player(this, keyH);
-    public Monster monster[] = new Monster[10];
+    public MapPlayer player = new MapPlayer(this, keyH);
+    public MapMonster monster[] = new MapMonster[10];
 
     
     /**
@@ -162,7 +162,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         tileM.draw(g2);
         player.draw(g2);
         
-        for (Monster elem : monster) {
+        for (MapMonster elem : monster) {
             if (elem != null) {
                 elem.draw(g2);
             }

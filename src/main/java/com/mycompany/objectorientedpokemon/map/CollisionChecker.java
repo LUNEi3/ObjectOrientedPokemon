@@ -5,7 +5,7 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
-import com.mycompany.objectorientedpokemon.map.mapEntity.Entity;
+import com.mycompany.objectorientedpokemon.map.mapEntity.MapEntity;
 import java.awt.Rectangle;
 
 /**
@@ -19,7 +19,7 @@ public class CollisionChecker {
         this.mp = mp;
     }
     
-    public void checkTileCollision(Entity en) {
+    public void checkTileCollision(MapEntity en) {
         int enLeftX   = en.worldX + en.solidArea.x;
         int enRightX  = en.worldX + en.solidArea.x + en.solidArea.width;
         int enTopY    = en.worldY + en.solidArea.y;
@@ -69,7 +69,7 @@ public class CollisionChecker {
         return mp.tileM.tiles[tileNum].collision;
     }
     
-    public int checkMonsterCollision(Entity player, Entity targets[]) {
+    public int checkMonsterCollision(MapEntity player, MapEntity targets[]) {
         int index = 999 ;
         
         for (int i = 0; i < targets.length; i++) {

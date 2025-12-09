@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
  *
  * @author User
  */
-public class Entity {
+public class MapEntity {
     protected MapPanel mp;
     protected BufferedImage right1, right2, left1, left2;
     public Rectangle solidArea = new Rectangle(0, 0, 40, 40);
@@ -25,7 +25,7 @@ public class Entity {
     protected boolean swapSprite = false;
     public boolean collisionOn = false;
     
-    public Entity(MapPanel mp) {
+    public MapEntity(MapPanel mp) {
         this.mp = mp;
     }
     

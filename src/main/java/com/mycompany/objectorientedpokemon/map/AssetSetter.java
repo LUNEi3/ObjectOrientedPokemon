@@ -5,7 +5,7 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
-import com.mycompany.objectorientedpokemon.map.mapEntity.Monster;
+import com.mycompany.objectorientedpokemon.map.mapEntity.MapMonster;
 import java.util.Random;
 
 /**
@@ -22,7 +22,7 @@ public class AssetSetter {
     
     public void setMonster(int numMonster) {
         for (int i = 0; i < numMonster; i++) {
-            mp.monster[i] = new Monster(mp);
+            mp.monster[i] = new MapMonster(mp);
             int[] coords = getXYMonsterSpawn();
             
             if (coords != null) {
@@ -47,7 +47,7 @@ public class AssetSetter {
             if (mp.tileM.mapTileNum[col][row] == 0) {
                 boolean tooClose = false;
                 
-                for (Monster m: mp.monster) {
+                for (MapMonster m: mp.monster) {
                     if (m != null) {
                         int mCol = m.worldX / GameConstants.TILE_SIZE;
                         int mRow = m.worldY / GameConstants.TILE_SIZE;

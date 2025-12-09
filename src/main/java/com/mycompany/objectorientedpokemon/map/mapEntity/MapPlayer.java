@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
-public class Player extends Entity {
+public class MapPlayer extends MapEntity {
     private MapPanel mp;
     private KeyHandler keyH;
     public int screenX, screenY;
     
-    public Player(MapPanel mp, KeyHandler keyH) {
+    public MapPlayer(MapPanel mp, KeyHandler keyH) {
         super(mp);
         this.mp = mp;
         this.keyH = keyH;
@@ -72,7 +72,7 @@ public class Player extends Entity {
             // Check Event
             mp.eHandler.checkEvent();
 
-            // Check if Player encounter Monster
+            // Check if MapPlayer encounter MapMonster
             int monsterIndex = mp.cChecker.checkMonsterCollision(this, mp.monster);
             encounterMonster(monsterIndex);
 
