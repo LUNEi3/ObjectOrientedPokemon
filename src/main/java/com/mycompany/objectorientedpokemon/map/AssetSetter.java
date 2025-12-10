@@ -44,7 +44,7 @@ public class AssetSetter {
             int col = random.nextInt(GameConstants.MAX_WORLD_COL);
             int row = random.nextInt(GameConstants.MAX_WORLD_ROW);
             
-            if (mp.tileM.mapTileNum[col][row] == 0) {
+            if (mp.tileM.mapTileNum[col][row] == 70 || mp.tileM.mapTileNum[col][row] == 80) {
                 boolean tooClose = false;
                 
                 for (MapMonster m: mp.monster) {

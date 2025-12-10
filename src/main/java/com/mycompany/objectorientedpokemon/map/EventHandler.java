@@ -29,12 +29,12 @@ public class EventHandler {
     }
     
     public void checkEvent() {
-        if (hit(14, 39, "any")) {
-            teleport("/maps/map1.txt", 15, 2);
+        if (hit(19, 4, "any")) {
+            teleport("/maps/MapMain.txt", 3, 38);
         }
-        if (hit(14, 0, "any")) {
-            teleport("/maps/worldMap1.txt", 15, 38);
-        }
+//        if (hit(14, 0, "any")) {
+//            teleport("/maps/worldMap1.txt", 15, 38);
+//        }
     }
     
     public boolean hit(int col, int row, String reqDirection) {

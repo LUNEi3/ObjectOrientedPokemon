@@ -41,7 +41,7 @@ public class MapPlayer extends MapEntity {
     private void setDefaultValues() {
         worldX = GameConstants.TILE_SIZE * 15;
         worldY = GameConstants.TILE_SIZE * 35;
-        speed = 4;
+        speed = 10;
         direction = "right";
     }
     

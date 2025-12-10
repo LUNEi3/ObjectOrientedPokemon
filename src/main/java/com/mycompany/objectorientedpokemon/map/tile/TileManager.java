@@ -26,44 +26,35 @@ public class TileManager {
     
     public TileManager(MapPanel mp) {
         this.mp = mp;
-        tiles = new Tile[30];
+        tiles = new Tile[200];
         mapTileNum = new int[GameConstants.MAX_WORLD_COL][GameConstants.MAX_WORLD_ROW];
         getTileImage();
-        loadMap("/maps/worldMap2.txt");
+        loadMap("/maps/MapMain.txt");
     }
     
     private void getTileImage() {
-//        setup(0, "grass", false);
-//        setup(1, "wall", true);
-//        setup(2, "water", true);
-//        setup(3, "tree", true);
-//        setup(4, "wooden", false);
-            setup(0, "0", false);
-            setup(1, "1", true);
-            setup(2, "2", true);
-            setup(3, "3", true);
-            setup(4, "4", true);
-            setup(5, "5", true);
-            setup(6, "6", true);
-            setup(7, "7", true);
-            setup(8, "8", true);
-            setup(9, "9", true);
-            setup(10, "10", true);
-            setup(11, "11", true);
-            setup(12, "12", true);
-            setup(13, "13", true);
-            setup(14, "14", true);
-            setup(15, "15", true);
-            setup(16, "16", true);
-            setup(17, "17", true);
-            setup(18, "18", true);
-            setup(19, "19", true);
-            setup(20, "20", true);
-            setup(21, "21", true);
-            setup(22, "22", true);
-            setup(23, "23", true);
-            setup(24, "24", true);
-            setup(25, "25", true);
+        // Loop through all possible numbers (0 to 99)
+        for (int i = 0; i < tiles.length; i++) {
+            String fileName = "/tiles/" + i + ".png";
+
+            // CHECK: Does this file actually exist?
+            // getResourceAsStream returns 'null' if the file is missing.
+            if (getClass().getResourceAsStream(fileName) != null) {
+
+                // It exists! Load it.
+                setup(i, String.valueOf(i), true);
+
+            } else {
+                // File doesn't exist (like 3.png). Skip it.
+                // tiles[i] will remain 'null'.
+            }
+        }
+
+        // MANUAL OVERRIDES (Set collision to false for walkable blocks)
+        // You must check if they exist first to avoid NullPointerExceptions
+        if (tiles[70] != null) tiles[70].collision = false; // Grass
+        if (tiles[80] != null) tiles[80].collision = false; // Sand/Path?
+        // ... etc
     }
     
     private void setup(int index, String path, boolean collision) {

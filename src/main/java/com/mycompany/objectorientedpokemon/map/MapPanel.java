@@ -33,7 +33,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     
     // ENTITY
     public MapPlayer player = new MapPlayer(this, keyH);
-    public MapMonster monster[] = new MapMonster[10];
+    public MapMonster monster[] = new MapMonster[25];
 
     
     /**
@@ -108,7 +108,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         this.requestFocusInWindow();
         gameStateOn = true;
-        aSetter.setMonster(5);
+        aSetter.setMonster(25);
     }
     
     @Override
@@ -161,6 +161,8 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         tileM.draw(g2);
         player.draw(g2);
+        System.out.println(player.worldX);
+        System.out.println(player.worldY);
         
         for (MapMonster elem : monster) {
             if (elem != null) {
