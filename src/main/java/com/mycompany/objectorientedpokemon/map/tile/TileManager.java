@@ -26,18 +26,44 @@ public class TileManager {
     
     public TileManager(MapPanel mp) {
         this.mp = mp;
-        tiles = new Tile[10];
+        tiles = new Tile[30];
         mapTileNum = new int[GameConstants.MAX_WORLD_COL][GameConstants.MAX_WORLD_ROW];
         getTileImage();
-        loadMap("/maps/worldMap1.txt");
+        loadMap("/maps/worldMap2.txt");
     }
     
     private void getTileImage() {
-        setup(0, "grass", false);
-        setup(1, "wall", true);
-        setup(2, "water", true);
-        setup(3, "tree", true);
-        setup(4, "wooden", false);
+//        setup(0, "grass", false);
+//        setup(1, "wall", true);
+//        setup(2, "water", true);
+//        setup(3, "tree", true);
+//        setup(4, "wooden", false);
+            setup(0, "0", false);
+            setup(1, "1", true);
+            setup(2, "2", true);
+            setup(3, "3", true);
+            setup(4, "4", true);
+            setup(5, "5", true);
+            setup(6, "6", true);
+            setup(7, "7", true);
+            setup(8, "8", true);
+            setup(9, "9", true);
+            setup(10, "10", true);
+            setup(11, "11", true);
+            setup(12, "12", true);
+            setup(13, "13", true);
+            setup(14, "14", true);
+            setup(15, "15", true);
+            setup(16, "16", true);
+            setup(17, "17", true);
+            setup(18, "18", true);
+            setup(19, "19", true);
+            setup(20, "20", true);
+            setup(21, "21", true);
+            setup(22, "22", true);
+            setup(23, "23", true);
+            setup(24, "24", true);
+            setup(25, "25", true);
     }
     
     private void setup(int index, String path, boolean collision) {

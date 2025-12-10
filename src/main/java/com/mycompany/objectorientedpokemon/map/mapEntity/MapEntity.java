@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
  */
 public class MapEntity {
     protected MapPanel mp;
-    protected BufferedImage right1, right2, left1, left2;
+    protected BufferedImage up1, up2, right1, right2, left1, left2;
     public Rectangle solidArea = new Rectangle(0, 0, 40, 40);
     public String direction;
     public int worldX, worldY, speed;

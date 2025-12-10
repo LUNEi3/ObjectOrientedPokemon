@@ -46,6 +46,8 @@ public class MapPlayer extends MapEntity {
     }
     
     private void getPlayerImage() {
+        up1 = setup("/player/up1");
+        up2 = setup("/player/up2");
         right1 = setup("/player/right1");
         right2 = setup("/player/right2");
         left1 = setup("/player/left1");
@@ -64,6 +66,8 @@ public class MapPlayer extends MapEntity {
             } else if (keyH.rightPressed) {
                 direction = "right";
             }
+            
+            
 
             // RESET COLLISION
             collisionOn = false;
@@ -114,9 +118,9 @@ public class MapPlayer extends MapEntity {
         switch(direction) {
             case "up" -> {
                 if (swapSprite) {
-                    image = right2;
+                    image = up1;
                 } else {
-                    image = left1;
+                    image = up2;
                 }
             }
                 
@@ -143,6 +147,7 @@ public class MapPlayer extends MapEntity {
                     image = right2;
                 }
             }   
+            
         }
         
         // Change player position when encounter the edge of map
