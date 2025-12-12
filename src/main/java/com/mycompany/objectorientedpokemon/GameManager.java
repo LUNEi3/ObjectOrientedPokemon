@@ -35,7 +35,7 @@ public class GameManager {
         menu = new MenuPanel(this);
         newGame = new NewGamePanel(this);
         pickUp = new PickUpPanel(this);
-        map = new MapPanel();
+        map = new MapPanel(this);
         
         mainContainer.add(menu, "MENU");
         mainContainer.add(newGame, "NEW_GAME");
@@ -63,6 +63,6 @@ public class GameManager {
     {
         cardLayout.show(mainContainer, "MAP");
         
-        map.requestFocusInWindow();
+        map.setupGame();
     }    
 }

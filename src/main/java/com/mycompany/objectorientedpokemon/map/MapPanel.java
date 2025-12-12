@@ -5,6 +5,7 @@
 package com.mycompany.objectorientedpokemon.map;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.GameManager;
 import com.mycompany.objectorientedpokemon.map.mapEntity.MapEntity;
 import com.mycompany.objectorientedpokemon.map.mapEntity.MapMonster;
 import com.mycompany.objectorientedpokemon.map.mapEntity.MapPlayer;
@@ -24,6 +25,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     private boolean isStopped;
     public boolean gameStateOn;
     private Thread gameThread;
+    public GameManager gameM;
     public KeyHandler keyH = new KeyHandler(this);
     public TileManager tileM = new TileManager(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
@@ -39,8 +41,9 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     /**
      * Creates new form GamePanel
      */
-    public MapPanel() {
+    public MapPanel(GameManager gameM) {
         initComponents();
+        this.gameM = gameM;
         this.setBackground(Color.gray);
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT));
@@ -48,7 +51,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
         
-        btnStop.setFocusable(false);
+        btnBackToMenu.setFocusable(false);
     }
 
     /**
@@ -60,12 +63,12 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnStop = new javax.swing.JButton();
+        btnBackToMenu = new javax.swing.JButton();
 
-        btnStop.setText("Stop");
-        btnStop.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBackToMenu.setText("Back to Menu");
+        btnBackToMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnStopMouseClicked(evt);
+                btnBackToMenuMouseClicked(evt);
             }
         });
 
@@ -75,27 +78,37 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(btnStop)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addComponent(btnBackToMenu)
+                .addContainerGap(281, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnStop)
+                .addComponent(btnBackToMenu)
                 .addContainerGap(271, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnStopMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStopMouseClicked
+    private void btnBackToMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackToMenuMouseClicked
         // TODO add your handling code here:
-        isStopped = true;
-        System.exit(0);
-    }//GEN-LAST:event_btnStopMouseClicked
+        gameThread = null;
+        gameM.showMenu();
+    }//GEN-LAST:event_btnBackToMenuMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnStop;
+    private javax.swing.JButton btnBackToMenu;
     // End of variables declaration//GEN-END:variables
 
+    public void setupGame() {
+        gameStateOn = true;
+        
+        if (gameThread == null) {
+            startGameThread();
+        }
+        
+        this.requestFocusInWindow();
+        aSetter.setMonster(25);
+    }
     
     @Override
     public void addNotify() {
@@ -108,7 +121,7 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         this.requestFocusInWindow();
         gameStateOn = true;
-        aSetter.setMonster(25);
+        
     }
     
     @Override
@@ -123,18 +136,14 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
-
             if (delta >= 1) {
-                if (!isStopped) {
+                if (gameStateOn) {
                     update();
-                    repaint();
                 }
+                repaint();
                 delta--;
             }
 
-            if (isStopped) {
-                 break; 
-            }
         }
     }
 
