@@ -29,12 +29,12 @@ public class EventHandler {
     }
     
     public void checkEvent() {
-        if (hit(19, 4, "any")) {
-            teleport("/maps/MapMain.txt", 3, 38);
+        if (hit(2, 39, "any")) {
+            teleport("/maps/Map2.txt", 3, 2);
         }
-//        if (hit(14, 0, "any")) {
-//            teleport("/maps/worldMap1.txt", 15, 38);
-//        }
+        if (hit(3, 0, "any")) {
+            teleport("/maps/MapMain.txt", 3, 37);
+        }
     }
     
     public boolean hit(int col, int row, String reqDirection) {
@@ -74,6 +74,6 @@ public class EventHandler {
         for(int i = 0; i < mp.monster.length; i++) {
             mp.monster[i] = null;
         }
-        mp.aSetter.setMonster(2); 
+        mp.aSetter.setMonster(25); 
     }
 }
