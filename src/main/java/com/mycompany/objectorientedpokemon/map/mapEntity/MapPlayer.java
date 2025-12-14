@@ -53,6 +53,8 @@ public class MapPlayer extends MapEntity {
         right2 = setup("/player/right2");
         left1 = setup("/player/left1");
         left2 = setup("/player/left2");
+        noneLeft = setup("/player/noneLeft");
+        noneRight = setup("/player/noneRight");
     } 
     
     public void update() {
@@ -107,9 +109,7 @@ public class MapPlayer extends MapEntity {
             if (spriteCounter > 10) {
                 swapSprite = !swapSprite;
                 spriteCounter = 0;
-            }
-            
-            
+            }  
         }
     }
     
@@ -149,6 +149,24 @@ public class MapPlayer extends MapEntity {
                 }
             }   
             
+        }
+        
+        if (!keyH.upPressed && !keyH.downPressed && !keyH.leftPressed && !keyH.rightPressed) {
+            switch (direction) {
+                case "right" -> {
+                    image = noneRight;
+                }
+                case "left" -> {
+                    image = noneLeft;
+                }
+                default -> {
+                    if (swapSprite) {
+                        image = noneLeft;
+                    } else {
+                        image = noneRight;
+                    }
+                }
+            }
         }
         
         // Change player position when encounter the edge of map
