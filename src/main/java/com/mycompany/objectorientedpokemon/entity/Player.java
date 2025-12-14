@@ -4,13 +4,15 @@
  */
 package com.mycompany.objectorientedpokemon.entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author User
  */
 public class Player {
     private String name = "Guest";
-    private Pokemon[] pokemons;
+    private ArrayList<Pokemon> pokemons;
     
     public String getName() {
         return this.name;
