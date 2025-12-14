@@ -5,6 +5,7 @@
 package com.mycompany.objectorientedpokemon;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.entity.Player;
 import com.mycompany.objectorientedpokemon.map.MapPanel;
 import com.mycompany.objectorientedpokemon.menu.MenuPanel;
 import com.mycompany.objectorientedpokemon.menu.NewGamePanel;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
  */
 public class GameManager {
     
+    public Player player;
     public JPanel mainContainer;
     private CardLayout cardLayout;
     
@@ -32,6 +34,7 @@ public class GameManager {
         mainContainer = new JPanel(cardLayout);
         mainContainer.setPreferredSize(new Dimension(GameConstants.SCREEN_WIDTH, GameConstants.SCREEN_HEIGHT));
         
+        player = new Player();
         menu = new MenuPanel(this);
         newGame = new NewGamePanel(this);
         pickUp = new PickUpPanel(this);

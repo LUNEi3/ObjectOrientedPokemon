@@ -37,6 +37,13 @@ public class UiMap {
         if (!mp.gameStateOn) {
             drawPauseScreen();
         }
+        
+        drawPlayerName();
+    }
+    
+    private void drawPlayerName() {
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40F));
+        g2.drawString(mp.gameM.player.getName(), 15, 80);
     }
 
     private void drawPauseScreen() {

@@ -63,7 +63,7 @@ public class NewGamePanel extends javax.swing.JPanel {
 
         btnBack = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -82,9 +82,9 @@ public class NewGamePanel extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setBackground(new java.awt.Color(255, 248, 224));
-        jTextField1.setFont(new java.awt.Font("Unispace", 1, 36)); // NOI18N
-        jTextField1.setInheritsPopupMenu(true);
+        txtName.setBackground(new java.awt.Color(255, 248, 224));
+        txtName.setFont(new java.awt.Font("Unispace", 1, 36)); // NOI18N
+        txtName.setInheritsPopupMenu(true);
 
         jLabel1.setFont(new java.awt.Font("Unispace", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,7 +102,7 @@ public class NewGamePanel extends javax.swing.JPanel {
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnStart))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(330, Short.MAX_VALUE))
         );
@@ -112,7 +112,7 @@ public class NewGamePanel extends javax.swing.JPanel {
                 .addContainerGap(181, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBack)
@@ -128,6 +128,11 @@ public class NewGamePanel extends javax.swing.JPanel {
 
     private void btnStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartMouseClicked
         // TODO add your handling code here:
+        if (txtName.getText().equals("")) {
+            gameM.player.setName("Guest");
+        } else {
+            gameM.player.setName(txtName.getText());
+        }
         gameM.showPickUp();
     }//GEN-LAST:event_btnStartMouseClicked
 
@@ -136,6 +141,6 @@ public class NewGamePanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 }
