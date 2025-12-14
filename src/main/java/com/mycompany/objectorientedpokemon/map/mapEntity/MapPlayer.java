@@ -5,6 +5,7 @@
 package com.mycompany.objectorientedpokemon.map.mapEntity;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.entity.Pokemon;
 import com.mycompany.objectorientedpokemon.map.MapPanel;
 import com.mycompany.objectorientedpokemon.map.KeyHandler;
 import java.awt.Graphics2D;
@@ -175,8 +176,10 @@ public class MapPlayer extends MapEntity {
     }
 
     private void encounterMonster(int index) {
-        String text = "You encouter Monster[" + index +"]";
         if (index != 999) {
+            String name = mp.monster[index].p.name;
+            String type = mp.monster[index].p.type;
+            String text = "You encouter Monster " + name + " " + "type: " + type;
             JOptionPane.showMessageDialog(null, text, "Title", JOptionPane.PLAIN_MESSAGE);
             mp.monster[index] = null;
             mp.keyH.releaseAll();

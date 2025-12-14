@@ -5,6 +5,7 @@
 package com.mycompany.objectorientedpokemon.map.mapEntity;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.entity.Pokemon;
 import com.mycompany.objectorientedpokemon.map.MapPanel;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -16,10 +17,11 @@ import java.awt.image.BufferedImage;
  */
 public class MapMonster extends MapEntity {
     private BufferedImage image1, image2;
+    public Pokemon p;
     
     public MapMonster(MapPanel mp) {
         super(mp);
-        
+        p = new Pokemon();
         direction = "down";
         speed = 1;
         solidArea = new Rectangle(20, GameConstants.TILE_SIZE, 40, 40);
