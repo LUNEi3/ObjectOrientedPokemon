@@ -136,6 +136,7 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void btnExitGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitGameMouseClicked
         // TODO add your handling code here:
+        gameM.playSE(4);
         System.exit(0);
     }//GEN-LAST:event_btnExitGameMouseClicked
 

@@ -177,12 +177,18 @@ public class MapPlayer extends MapEntity {
 
     private void encounterMonster(int index) {
         if (index != 999) {
+            mp.gameM.stopMusic();
+            mp.gameM.playSE(3);
+            
             String name = mp.monster[index].p.name;
             String type = mp.monster[index].p.type;
             String text = "You encouter Monster " + name + " " + "type: " + type;
             JOptionPane.showMessageDialog(null, text, "Title", JOptionPane.PLAIN_MESSAGE);
             mp.monster[index] = null;
             mp.keyH.releaseAll();
+            
+            mp.gameM.stopSE();
+            mp.gameM.playMusic(1);
         }
 
     }

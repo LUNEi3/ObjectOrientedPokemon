@@ -21,6 +21,11 @@ public class Sound {
     
     public Sound() {
         soundURL[0] = getClass().getResource("/sounds/toothless_dancing.wav");
+        soundURL[1] = getClass().getResource("/sounds/menuBGM60.wav");
+        soundURL[2] = getClass().getResource("/sounds/menuBGM30.wav");
+        soundURL[3] = getClass().getResource("/sounds/encounter.wav");
+        soundURL[4] = getClass().getResource("/sounds/btnClick.wav");
+        soundURL[5] = getClass().getResource("/sounds/gameOver.wav");
     }
     
     public void setFile(int i) {
@@ -31,7 +36,7 @@ public class Sound {
             
             // OPTIONAL: Lower the volume (Games are usually too loud!)
              FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-             gainControl.setValue(-20.0f); // Reduce volume by 20 decibels
+             gainControl.setValue(-30.0f); // Reduce volume by 20 decibels
         } catch (Exception e) {
             e.printStackTrace();
         }

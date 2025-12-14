@@ -22,6 +22,8 @@ public class GameManager {
     
     public Player player;
     public JPanel mainContainer;
+    public Sound music = new Sound();
+    public Sound se = new Sound();
     private CardLayout cardLayout;
     
     private MenuPanel menu;
@@ -44,6 +46,8 @@ public class GameManager {
         mainContainer.add(newGame, "NEW_GAME");
         mainContainer.add(pickUp, "PICK_UP");
         mainContainer.add(map, "MAP");
+        
+        playMusic(2);
     }
     
     public JPanel getPanel() {
@@ -51,21 +55,47 @@ public class GameManager {
     }
     
     public void showMenu() {
+        stopMusic();
+        playSE(4);
+        
         cardLayout.show(mainContainer, "MENU");
+        
+        playMusic(2);
     }
     
     public void showNewGame() {
+        playSE(4);
         cardLayout.show(mainContainer, "NEW_GAME");
     }
     
     public void showPickUp() {
+        playSE(4);
         cardLayout.show(mainContainer, "PICK_UP");
     }
     
-    public void showMap()
-    {
+    public void showMap() {
+        stopMusic();
+        playSE(4);
         cardLayout.show(mainContainer, "MAP");
         
         map.setupGame();
+        playMusic(1);
     }    
+    
+    public void playMusic(int i) {
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+    public void stopMusic() {
+        music.stop();
+    }
+    
+    public void playSE(int i) {
+        se.setFile(i);
+        se.play();
+    }
+    public void stopSE() {
+        se.stop();
+    }
 }

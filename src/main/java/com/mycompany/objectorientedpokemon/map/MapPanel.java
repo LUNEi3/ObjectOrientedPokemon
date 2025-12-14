@@ -101,7 +101,6 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
 
     public void setupGame() {
         gameStateOn = true;
-        
         if (gameThread == null) {
             startGameThread();
         }
