@@ -24,7 +24,11 @@ public class MapMonster extends MapEntity {
         p = new Pokemon();
         direction = "down";
         speed = 1;
-        solidArea = new Rectangle(20, GameConstants.TILE_SIZE, 40, 40);
+        solidArea = new Rectangle();
+        solidArea.x = 60;
+        solidArea.y = 60;
+        solidArea.width = 80;
+        solidArea.height = 80;
         
         getImage();
     }

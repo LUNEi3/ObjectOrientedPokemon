@@ -53,8 +53,11 @@ public class TileManager {
         // MANUAL OVERRIDES (Set collision to false for walkable blocks)
         // You must check if they exist first to avoid NullPointerExceptions
         if (tiles[70] != null) tiles[70].collision = false; // Grass
-        if (tiles[80] != null) tiles[80].collision = false; // Sand/Path?
-        // ... etc
+        if (tiles[80] != null) tiles[80].collision = false; // Path
+        if (tiles[61] != null) tiles[61].collision = false; // Top Left tree
+        if (tiles[62] != null) tiles[62].collision = false; // Top Right tree
+        if (tiles[73] != null) tiles[73].collision = false;
+        
     }
     
     private void setup(int index, String path, boolean collision) {

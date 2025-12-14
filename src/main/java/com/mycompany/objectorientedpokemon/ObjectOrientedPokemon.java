@@ -17,31 +17,31 @@ import javax.swing.JFrame;
 public class ObjectOrientedPokemon {
 
     public static void main(String[] args) {
-//        // SYSTEM
-//        GameManager manager = new GameManager();
-//        MainFrame main = new MainFrame();
-//        
-//        // SETUP
-//        main.setResizable(false);
-//        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        main.setLocationRelativeTo(null);
-//        main.setTitle("Obeject-Oriented-Pokemon (Working...)");
-//  
-//        // HANDLE
-//        main.add(manager.getPanel());
-//        main.pack();
-//        main.setVisible(true);
+        // SYSTEM
+        GameManager manager = new GameManager();
+        MainFrame main = new MainFrame();
+        
+        // SETUP
+        main.setResizable(false);
+        main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        main.setLocationRelativeTo(null);
+        main.setTitle("Obeject-Oriented-Pokemon (Working...)");
+  
+        // HANDLE
+        main.add(manager.getPanel());
+        main.pack();
+        main.setVisible(true);
 
-        Pokemon p = new Pokemon();
-        System.out.println(p.name + " " +p.type);
-        System.out.println("ATK:" + p.atk + " HP:" + p.maxHp + " DEF:" + p.def);
-        p.evolution();
-        System.out.println(p.form);
-        System.out.println(p.name + " " +p.type);
-        System.out.println("ATK:" + p.atk + " HP:" + p.maxHp + " DEF:" + p.def);
-        p.evolution();
-        System.out.println(p.form);
-        System.out.println(p.name + " " +p.type);
-        System.out.println("ATK:" + p.atk + " HP:" + p.maxHp + " DEF:" + p.def);
+//        Pokemon p = new Pokemon("electric");
+//        System.out.println(p.name + " " +p.type);
+//        System.out.println("ATK:" + p.atk + " HP:" + p.maxHp + " DEF:" + p.def);
+//        p.evolution();
+//        System.out.println(p.form);
+//        System.out.println(p.name + " " +p.type);
+//        System.out.println("ATK:" + p.atk + " HP:" + p.maxHp + " DEF:" + p.def);
+//        p.evolution();
+//        System.out.println(p.form);
+//        System.out.println(p.name + " " +p.type);
+//        System.out.println("ATK:" + p.atk + " HP:" + p.maxHp + " DEF:" + p.def);
     }
 }
