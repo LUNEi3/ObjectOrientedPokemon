@@ -133,6 +133,7 @@ public class NewGamePanel extends javax.swing.JPanel {
         } else {
             gameM.player.setName(txtName.getText());
         }
+        gameM.player.myParty.clear();
         gameM.showPickUp();
     }//GEN-LAST:event_btnStartMouseClicked
 
