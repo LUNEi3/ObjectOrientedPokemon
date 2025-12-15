@@ -4,13 +4,14 @@
  */
 package com.mycompany.objectorientedpokemon.entity;
 
-import java.awt.image.BufferedImage;
+import com.mycompany.objectorientedpokemon.combat.Skill;
+import com.mycompany.objectorientedpokemon.combat.SkillDatabase;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -19,30 +20,37 @@ import javax.imageio.ImageIO;
 public class Pokemon {
     public String name, type;
     public int hp, maxHp, atk, def;
-    public BufferedImage image;
-    public ArrayList<BufferedImage> formImages;
+    public ImageIcon image;
+    public ArrayList<ImageIcon> formImages;
     public ArrayList<String> names;
+    public ArrayList<Skill> mySkills = new ArrayList<>(); 
     
     public int form;
     private Random rand = new Random();
     
     // Harded Fix
-    public Pokemon(String name, int maxHp, int atk, int def, String type, String imagePath) {
+    public Pokemon(String baseName, int maxHp, int atk, int def, String type) {
         this.form = 1;
-        this.name = name;
+        this.name = baseName;
         this.maxHp = maxHp;
         this.hp = maxHp;
         this.atk = atk;
         this.def = def;
         this.type = type;
+        this.formImages = new ArrayList<>();
+        this.names = new ArrayList<>();
         
-        if (imagePath != null && !imagePath.isEmpty()) {
-            try {
-                this.image = ImageIO.read(getClass().getResourceAsStream(imagePath));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            loadNames();
+            loadImages();
+            this.image = this.formImages.get(form);
+        } catch(Exception e) {
+            e.printStackTrace();
         }
+        evolution();
+        evolution();
+        assignSkills();
+        
     }
     
     public Pokemon(String type) {
@@ -52,6 +60,10 @@ public class Pokemon {
         this.type = type;
         randomType();
         setup();
+        assignSkills();
+        
+        this.hp = maxHp;
+
     }
 
     public Pokemon(){
@@ -85,6 +97,7 @@ public class Pokemon {
         // Update name and image
         this.name = this.names.get(form - 1);
         this.image = this.formImages.get(form - 1);
+        this.hp = maxHp;
     }
     
     private void randomType() {
@@ -120,17 +133,45 @@ public class Pokemon {
     
     private void loadImages() {
         String path = "/pokemon/" + this.type + "/" + this.name;
-        
         for (int i = 0; i < 3 ; i++) {
             String imagePath = path + "/" + (i + 1) + ".png";
             if (getClass().getResourceAsStream(imagePath) != null) {
                 try {
-                    BufferedImage image = ImageIO.read(getClass().getResourceAsStream(imagePath));
+                    ImageIcon image = new ImageIcon(getClass().getResource(imagePath));
+//                    System.out.println(imagePath);
+//                    System.out.println(image);
                     formImages.add(image);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    
+    public void loadNames() {
+        // Load all names of Base Pokemon
+        String path = "/pokemon/" + this.type + "/" + this.name + "/name.txt";
+        ArrayList<String> arr = new ArrayList<>();
+        try {
+            InputStream is = getClass().getResourceAsStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            String line;
+            int i = 0;
+
+            while ((line = br.readLine()) != null) {
+                arr.add(line);
+                i++;
+            }
+            br.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        // Adding name of all Pokemon Forms to names[]
+        for (String x: arr) {
+            this.names.add(x);
         }
     }
     
@@ -160,33 +201,12 @@ public class Pokemon {
         // Set Base Name
         this.name = arr.get(rand.nextInt(arr.size()));
         
-        
         // Load all names of Base Pokemon
-        path = "/pokemon/" + this.type + "/" + this.name + "/name.txt";
-        arr = new ArrayList<>();
-        try {
-            InputStream is = getClass().getResourceAsStream(path);
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
-            String line;
-            int i = 0;
-
-            while ((line = br.readLine()) != null) {
-                arr.add(line);
-                i++;
-            }
-            br.close();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (this.name != null) {
+            loadNames();
+        } else {
+            System.out.println("Name is null!!!");
         }
-        
-        
-        // Adding name of all Pokemon Forms to names[]
-        for (String x: arr) {
-            this.names.add(x);
-        }
-        
         
         // Load Images
         if (this.name != null) {
@@ -194,6 +214,8 @@ public class Pokemon {
          } else {
             System.out.println("Name is null!!!");
         }
+        // Set current image
+        this.image = this.formImages.get(form);
         
         
         // Random Status based on Type
@@ -224,5 +246,52 @@ public class Pokemon {
                 this.def = rand.nextInt(36, 59);
             }
         }
+    }
+    
+    public void learnSkill(Skill s) {
+        mySkills.add(s);
+    }
+
+    private void assignSkills() {
+        mySkills.clear();
+        if (this.type == null) return;
+        
+        switch (this.type) {
+            case "fire" -> {
+                learnSkill(SkillDatabase.getFireSkills().get(0));
+                learnSkill(SkillDatabase.getFireSkills().get(3));
+                if (this.maxHp > 100) learnSkill(SkillDatabase.getFireUltimates().get(0));
+            }
+            case "water" -> {
+                learnSkill(SkillDatabase.getWaterSkills().get(0));
+                learnSkill(SkillDatabase.getWaterSkills().get(4));
+                if (this.maxHp > 100) learnSkill(SkillDatabase.getWaterUltimates().get(0));
+            }
+            case "leaf" -> {
+                learnSkill(SkillDatabase.getLeafSkills().get(1));
+                learnSkill(SkillDatabase.getLeafSkills().get(2));
+                if (this.maxHp > 100) learnSkill(SkillDatabase.getLeafUltimates().get(0));
+            }
+            case "rock" -> {
+                learnSkill(SkillDatabase.getRockSkills().get(1));
+                learnSkill(SkillDatabase.getRockSkills().get(3));
+                if (this.maxHp > 100) learnSkill(SkillDatabase.getRockUltimates().get(0));
+            }
+            case "electric" -> {
+                learnSkill(SkillDatabase.getElectricSkills().get(0));
+                learnSkill(SkillDatabase.getElectricSkills().get(4));
+                if (this.maxHp > 100) learnSkill(SkillDatabase.getElectricUltimates().get(0));
+            }
+        }
+    }
+    
+    public void takeDamage(int dmg) {
+        this.hp -= dmg;
+        if (this.hp < 0) this.hp = 0;
+    }
+    
+    @Override
+    public String toString() {
+        return name + " (HP: " + hp + "/" + maxHp + ")";
     }
 }

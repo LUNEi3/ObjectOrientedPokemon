@@ -5,6 +5,7 @@
 package com.mycompany.objectorientedpokemon;
 
 import com.mycompany.objectorientedpokemon.GameConstants;
+import com.mycompany.objectorientedpokemon.combat.BattlePanel;
 import com.mycompany.objectorientedpokemon.entity.Player;
 import com.mycompany.objectorientedpokemon.map.MapPanel;
 import com.mycompany.objectorientedpokemon.menu.MenuPanel;
@@ -30,6 +31,7 @@ public class GameManager {
     private NewGamePanel newGame;
     private PickUpPanel pickUp;
     private MapPanel map;
+    public BattlePanel battle;
     
     public GameManager() {  
         cardLayout = new CardLayout();
@@ -41,11 +43,13 @@ public class GameManager {
         newGame = new NewGamePanel(this);
         pickUp = new PickUpPanel(this);
         map = new MapPanel(this);
+        battle = new BattlePanel(this);
         
         mainContainer.add(menu, "MENU");
         mainContainer.add(newGame, "NEW_GAME");
         mainContainer.add(pickUp, "PICK_UP");
         mainContainer.add(map, "MAP");
+        mainContainer.add(battle, "BATTLE");
         
         playMusic(2);
     }
@@ -81,6 +85,12 @@ public class GameManager {
         map.setupGame();
         playMusic(1);
     }    
+    
+    public void showBattle() {
+        stopMusic();
+        playMusic(3);
+        cardLayout.show(mainContainer, "BATTLE");
+    }
     
     public void playMusic(int i) {
         music.setFile(i);

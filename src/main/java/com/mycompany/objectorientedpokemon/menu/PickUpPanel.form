@@ -21,31 +21,48 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="330" max="-2" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-              <Component id="btnStart" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnStart" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="pnPoke1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="pnPoke2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="pnPoke3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="330" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="359" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="571" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="346" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="89" max="-2" attributes="0"/>
-              <EmptySpace pref="302" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="pnPoke2" max="32767" attributes="0"/>
+                  <Component id="pnPoke1" max="32767" attributes="0"/>
+                  <Component id="pnPoke3" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnBack" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnStart" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,5 +106,116 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="pnPoke2">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xa;    javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(&quot;/pokemon/leaf/Bulbasaur/1.png&quot;));&#xa;    java.awt.Image img = icon.getImage(); &#xa;&#xa;    @Override&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xa;        // 1. Clear the background (so transparency works)&#xa;        super.paintComponent(g);&#xa;        &#xa;        if (img != null) {&#xa;            int panelW = getWidth();&#xa;            int panelH = getHeight();&#xa;            int imgW = icon.getIconWidth();&#xa;            int imgH = icon.getIconHeight();&#xa;            &#xa;            // 2. MATH: Calculate the scale factor&#xa;            // We compare the Panel&apos;s size to the Image&apos;s size&#xa;            double widthRatio = (double) panelW / imgW;&#xa;            double heightRatio = (double) panelH / imgH;&#xa;            &#xa;            // Use Math.min() to &quot;FIT&quot; the image (ensure it&apos;s fully visible)&#xa;            // Use Math.max() if you wanted to &quot;FILL&quot; (crop edges)&#xa;            double scale = Math.min(widthRatio, heightRatio); &#xa;            &#xa;            // 3. Calculate new size based on scale&#xa;            int newW = (int) (imgW * scale);&#xa;            int newH = (int) (imgH * scale);&#xa;            &#xa;            // 4. Calculate position to CENTER the image&#xa;            int x = (panelW - newW) / 2;&#xa;            int y = (panelH - newH) / 2;&#xa;            &#xa;            // 5. Draw it!&#xa;            g.drawImage(img, x, y, newW, newH, null);&#xa;        }&#xa;    }&#xa;}"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="radio2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="83" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="radio2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="radio2">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnPoke1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xa;    javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(&quot;/pokemon/fire/Charmander/1.png&quot;));&#xa;    java.awt.Image img = icon.getImage(); &#xa;&#xa;    @Override&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xa;        // 1. Clear the background (so transparency works)&#xa;        super.paintComponent(g);&#xa;        &#xa;        if (img != null) {&#xa;            int panelW = getWidth();&#xa;            int panelH = getHeight();&#xa;            int imgW = icon.getIconWidth();&#xa;            int imgH = icon.getIconHeight();&#xa;            &#xa;            // 2. MATH: Calculate the scale factor&#xa;            // We compare the Panel&apos;s size to the Image&apos;s size&#xa;            double widthRatio = (double) panelW / imgW;&#xa;            double heightRatio = (double) panelH / imgH;&#xa;            &#xa;            // Use Math.min() to &quot;FIT&quot; the image (ensure it&apos;s fully visible)&#xa;            // Use Math.max() if you wanted to &quot;FILL&quot; (crop edges)&#xa;            double scale = Math.min(widthRatio, heightRatio); &#xa;            &#xa;            // 3. Calculate new size based on scale&#xa;            int newW = (int) (imgW * scale);&#xa;            int newH = (int) (imgH * scale);&#xa;            &#xa;            // 4. Calculate position to CENTER the image&#xa;            int x = (panelW - newW) / 2;&#xa;            int y = (panelH - newH) / 2;&#xa;            &#xa;            // 5. Draw it!&#xa;            g.drawImage(img, x, y, newW, newH, null);&#xa;        }&#xa;    }&#xa;}"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="radio1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="83" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="245" max="32767" attributes="0"/>
+                  <Component id="radio1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="radio1">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pnPoke3">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+            <LineBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel() {&#xa;    javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(&quot;/pokemon/water/Squirtle/1.png&quot;));&#xa;    java.awt.Image img = icon.getImage(); &#xa;&#xa;    @Override&#xa;    protected void paintComponent(java.awt.Graphics g) {&#xa;        // 1. Clear the background (so transparency works)&#xa;        super.paintComponent(g);&#xa;        &#xa;        if (img != null) {&#xa;            int panelW = getWidth();&#xa;            int panelH = getHeight();&#xa;            int imgW = icon.getIconWidth();&#xa;            int imgH = icon.getIconHeight();&#xa;            &#xa;            // 2. MATH: Calculate the scale factor&#xa;            // We compare the Panel&apos;s size to the Image&apos;s size&#xa;            double widthRatio = (double) panelW / imgW;&#xa;            double heightRatio = (double) panelH / imgH;&#xa;            &#xa;            // Use Math.min() to &quot;FIT&quot; the image (ensure it&apos;s fully visible)&#xa;            // Use Math.max() if you wanted to &quot;FILL&quot; (crop edges)&#xa;            double scale = Math.min(widthRatio, heightRatio); &#xa;            &#xa;            // 3. Calculate new size based on scale&#xa;            int newW = (int) (imgW * scale);&#xa;            int newH = (int) (imgH * scale);&#xa;            &#xa;            // 4. Calculate position to CENTER the image&#xa;            int x = (panelW - newW) / 2;&#xa;            int y = (panelH - newH) / 2;&#xa;            &#xa;            // 5. Draw it!&#xa;            g.drawImage(img, x, y, newW, newH, null);&#xa;        }&#xa;    }&#xa;}"/>
+      </AuxValues>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                  <Component id="radio3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="83" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="245" max="32767" attributes="0"/>
+                  <Component id="radio3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="radio3">
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

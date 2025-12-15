@@ -169,8 +169,8 @@ public class MapPanel extends javax.swing.JPanel implements Runnable {
         
         tileM.draw(g2);
         player.draw(g2);
-        System.out.println(player.worldX);
-        System.out.println(player.worldY);
+//        System.out.println(player.worldX);
+//        System.out.println(player.worldY);
         
         for (MapMonster elem : monster) {
             if (elem != null) {

@@ -12,12 +12,23 @@ import java.util.ArrayList;
  */
 public class Player {
     private String name = "Guest";
-    private ArrayList<Pokemon> pokemons;
+    public ArrayList<Pokemon> myParty;
+    
+    public Player() {
+        myParty = new ArrayList<>();
+    }
     
     public String getName() {
         return this.name;
     }
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public Pokemon getPokemon() {
+        return this.myParty.get(0);
+    }
+    public void addPokemon(Pokemon p) {
+        myParty.add(p);
     }
 }

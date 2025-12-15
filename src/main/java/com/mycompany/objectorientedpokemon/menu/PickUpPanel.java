@@ -5,7 +5,9 @@
 package com.mycompany.objectorientedpokemon.menu;
 
 import com.mycompany.objectorientedpokemon.GameManager;
+import com.mycompany.objectorientedpokemon.entity.Pokemon;
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 
 /**
  *
@@ -41,6 +43,15 @@ public class PickUpPanel extends javax.swing.JPanel {
         btnStart.setOpaque(false);
         btnStart.setFocusPainted(false);
         btnStart.setBorder(null);
+        
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(radio1); // Charmander (pnPoke1)
+        bg.add(radio2); // Bulbasaur (pnPoke2)
+        bg.add(radio3); // Squirtle (pnPoke3)
+        
+        radio1.setOpaque(false);
+        radio2.setOpaque(false);
+        radio3.setOpaque(false);
     }
     
     @Override
@@ -65,6 +76,120 @@ public class PickUpPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        pnPoke2 = new javax.swing.JPanel() {
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/pokemon/leaf/Bulbasaur/1.png"));
+            java.awt.Image img = icon.getImage();
+
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                // 1. Clear the background (so transparency works)
+                super.paintComponent(g);
+
+                if (img != null) {
+                    int panelW = getWidth();
+                    int panelH = getHeight();
+                    int imgW = icon.getIconWidth();
+                    int imgH = icon.getIconHeight();
+
+                    // 2. MATH: Calculate the scale factor
+                    // We compare the Panel's size to the Image's size
+                    double widthRatio = (double) panelW / imgW;
+                    double heightRatio = (double) panelH / imgH;
+
+                    // Use Math.min() to "FIT" the image (ensure it's fully visible)
+                    // Use Math.max() if you wanted to "FILL" (crop edges)
+                    double scale = Math.min(widthRatio, heightRatio);
+
+                    // 3. Calculate new size based on scale
+                    int newW = (int) (imgW * scale);
+                    int newH = (int) (imgH * scale);
+
+                    // 4. Calculate position to CENTER the image
+                    int x = (panelW - newW) / 2;
+                    int y = (panelH - newH) / 2;
+
+                    // 5. Draw it!
+                    g.drawImage(img, x, y, newW, newH, null);
+                }
+            }
+        };
+        radio2 = new javax.swing.JRadioButton();
+        pnPoke1 = new javax.swing.JPanel() {
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/pokemon/fire/Charmander/1.png"));
+            java.awt.Image img = icon.getImage();
+
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                // 1. Clear the background (so transparency works)
+                super.paintComponent(g);
+
+                if (img != null) {
+                    int panelW = getWidth();
+                    int panelH = getHeight();
+                    int imgW = icon.getIconWidth();
+                    int imgH = icon.getIconHeight();
+
+                    // 2. MATH: Calculate the scale factor
+                    // We compare the Panel's size to the Image's size
+                    double widthRatio = (double) panelW / imgW;
+                    double heightRatio = (double) panelH / imgH;
+
+                    // Use Math.min() to "FIT" the image (ensure it's fully visible)
+                    // Use Math.max() if you wanted to "FILL" (crop edges)
+                    double scale = Math.min(widthRatio, heightRatio);
+
+                    // 3. Calculate new size based on scale
+                    int newW = (int) (imgW * scale);
+                    int newH = (int) (imgH * scale);
+
+                    // 4. Calculate position to CENTER the image
+                    int x = (panelW - newW) / 2;
+                    int y = (panelH - newH) / 2;
+
+                    // 5. Draw it!
+                    g.drawImage(img, x, y, newW, newH, null);
+                }
+            }
+        };
+        radio1 = new javax.swing.JRadioButton();
+        pnPoke3 = new javax.swing.JPanel() {
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/pokemon/water/Squirtle/1.png"));
+            java.awt.Image img = icon.getImage();
+
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                // 1. Clear the background (so transparency works)
+                super.paintComponent(g);
+
+                if (img != null) {
+                    int panelW = getWidth();
+                    int panelH = getHeight();
+                    int imgW = icon.getIconWidth();
+                    int imgH = icon.getIconHeight();
+
+                    // 2. MATH: Calculate the scale factor
+                    // We compare the Panel's size to the Image's size
+                    double widthRatio = (double) panelW / imgW;
+                    double heightRatio = (double) panelH / imgH;
+
+                    // Use Math.min() to "FIT" the image (ensure it's fully visible)
+                    // Use Math.max() if you wanted to "FILL" (crop edges)
+                    double scale = Math.min(widthRatio, heightRatio);
+
+                    // 3. Calculate new size based on scale
+                    int newW = (int) (imgW * scale);
+                    int newH = (int) (imgH * scale);
+
+                    // 4. Calculate position to CENTER the image
+                    int x = (panelW - newW) / 2;
+                    int y = (panelH - newH) / 2;
+
+                    // 5. Draw it!
+                    g.drawImage(img, x, y, newW, newH, null);
+                }
+            }
+        };
+        radio3 = new javax.swing.JRadioButton();
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
@@ -89,31 +214,101 @@ public class PickUpPanel extends javax.swing.JPanel {
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jLabel1.setOpaque(true);
 
+        pnPoke2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout pnPoke2Layout = new javax.swing.GroupLayout(pnPoke2);
+        pnPoke2.setLayout(pnPoke2Layout);
+        pnPoke2Layout.setHorizontalGroup(
+            pnPoke2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnPoke2Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(radio2)
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        pnPoke2Layout.setVerticalGroup(
+            pnPoke2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPoke2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(radio2)
+                .addGap(23, 23, 23))
+        );
+
+        pnPoke1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout pnPoke1Layout = new javax.swing.GroupLayout(pnPoke1);
+        pnPoke1.setLayout(pnPoke1Layout);
+        pnPoke1Layout.setHorizontalGroup(
+            pnPoke1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnPoke1Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(radio1)
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        pnPoke1Layout.setVerticalGroup(
+            pnPoke1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPoke1Layout.createSequentialGroup()
+                .addContainerGap(245, Short.MAX_VALUE)
+                .addComponent(radio1)
+                .addGap(23, 23, 23))
+        );
+
+        pnPoke3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout pnPoke3Layout = new javax.swing.GroupLayout(pnPoke3);
+        pnPoke3.setLayout(pnPoke3Layout);
+        pnPoke3Layout.setHorizontalGroup(
+            pnPoke3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnPoke3Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addComponent(radio3)
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        pnPoke3Layout.setVerticalGroup(
+            pnPoke3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPoke3Layout.createSequentialGroup()
+                .addContainerGap(245, Short.MAX_VALUE)
+                .addComponent(radio3)
+                .addGap(23, 23, 23))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(330, 330, 330)
-                .addComponent(btnBack)
-                .addGap(176, 176, 176)
-                .addComponent(btnStart)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(320, 320, 320)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnStart))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnPoke1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(pnPoke2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(pnPoke3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(330, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(359, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(350, 350, 350))
+                .addGap(346, 346, 346))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(142, 142, 142)
+                .addGap(130, 130, 130)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnPoke2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnPoke1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnPoke3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBack)
                     .addComponent(btnStart))
-                .addGap(116, 116, 116))
+                .addGap(75, 75, 75))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -124,7 +319,20 @@ public class PickUpPanel extends javax.swing.JPanel {
 
     private void btnStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartMouseClicked
         // TODO add your handling code here:
-        gameM.showMap();
+        Pokemon p = null;
+        if (radio1.isSelected()) {
+            p = new Pokemon("Charmander", 50, 70, 50, "fire");
+        } else if (radio2.isSelected()) {
+            p = new Pokemon("Bulbasaur", 60, 65, 54, "leaf");
+        } else if (radio3.isSelected()) {
+            p = new Pokemon("Squirtle", 70, 60, 45, "water");
+        }
+        
+        if (p != null) {
+            gameM.player.addPokemon(p);
+            // System.out.println(gameM.player.myParty);
+            gameM.showMap();
+        }
     }//GEN-LAST:event_btnStartMouseClicked
 
 
@@ -132,5 +340,11 @@ public class PickUpPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnStart;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel pnPoke1;
+    private javax.swing.JPanel pnPoke2;
+    private javax.swing.JPanel pnPoke3;
+    private javax.swing.JRadioButton radio1;
+    private javax.swing.JRadioButton radio2;
+    private javax.swing.JRadioButton radio3;
     // End of variables declaration//GEN-END:variables
 }
