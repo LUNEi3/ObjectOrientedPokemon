@@ -148,7 +148,11 @@ public class MenuPanel extends javax.swing.JPanel {
     private void btnLoadGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoadGameMouseClicked
         // TODO add your handling code here:
 //        JOptionPane.showMessageDialog(null, "Load game is not done yet...", "Sorry", JOptionPane.PLAIN_MESSAGE);
-        gameM.showMap();
+        if (gameM.player.myParty.isEmpty()) {
+            gameM.showNewGame();
+        } else {
+            gameM.showMap();
+        }
     }//GEN-LAST:event_btnLoadGameMouseClicked
 
 

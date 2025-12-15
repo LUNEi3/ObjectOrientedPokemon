@@ -26,6 +26,10 @@ public class Sound {
         soundURL[3] = getClass().getResource("/sounds/encounter.wav");
         soundURL[4] = getClass().getResource("/sounds/btnClick.wav");
         soundURL[5] = getClass().getResource("/sounds/gameOver.wav");
+        soundURL[6] = getClass().getResource("/sounds/hit.wav");
+        soundURL[7] = getClass().getResource("/sounds/ultimateHit.wav");
+        soundURL[8] = getClass().getResource("/sounds/ichooseyou.wav");
+        soundURL[9] = getClass().getResource("/sounds/itemuse.wav");
     }
     
     public void setFile(int i) {
@@ -34,9 +38,12 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
             
-            // OPTIONAL: Lower the volume (Games are usually too loud!)
-             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-             gainControl.setValue(-30.0f); // Reduce volume by 20 decibels
+            if (i == 1 || i == 2|| i == 3 || i == 4) {
+                // OPTIONAL: Lower the volume (Games are usually too loud!)
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                gainControl.setValue(-15.0f); // Reduce volume by 20 decibels
+            }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

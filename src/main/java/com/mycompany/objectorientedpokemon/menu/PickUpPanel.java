@@ -330,7 +330,7 @@ public class PickUpPanel extends javax.swing.JPanel {
         
         if (p != null) {
             gameM.player.addPokemon(p);
-            // System.out.println(gameM.player.myParty);
+            System.out.println(gameM.player.myParty);
             gameM.showMap();
         }
     }//GEN-LAST:event_btnStartMouseClicked

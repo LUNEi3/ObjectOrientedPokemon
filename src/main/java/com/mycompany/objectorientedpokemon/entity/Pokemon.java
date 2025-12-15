@@ -43,12 +43,12 @@ public class Pokemon {
         try {
             loadNames();
             loadImages();
-            this.image = this.formImages.get(form);
+            this.image = this.formImages.get(form - 1);
         } catch(Exception e) {
             e.printStackTrace();
         }
-        evolution();
-        evolution();
+//        evolution();
+//        evolution(); 
         assignSkills();
         
     }

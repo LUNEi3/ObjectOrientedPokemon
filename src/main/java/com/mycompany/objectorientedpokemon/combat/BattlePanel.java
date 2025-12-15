@@ -10,6 +10,7 @@ import com.mycompany.objectorientedpokemon.entity.Pokemon;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.imageio.ImageIO;
 /**
  *
  * @author thana
@@ -22,6 +23,7 @@ public class BattlePanel extends javax.swing.JPanel {
     private java.util.List<GameItem> myBag = new java.util.ArrayList<>();
     private javax.swing.JTextArea txtLog;
     private javax.swing.JScrollPane scrollLog;
+    private java.awt.image.BufferedImage backgroundImage;
     
     public BattlePanel(GameManager gameM) { 
         initComponents();
@@ -38,8 +40,7 @@ public class BattlePanel extends javax.swing.JPanel {
         // --- Create Narrator Box ---
         txtLog = new javax.swing.JTextArea();
         txtLog.setEditable(false); 
-        txtLog.setFont(new java.awt.Font("Monospaced", java.awt.Font.BOLD, 16)); 
-        txtLog.setText("Battle Start!\n------------------------------------------------\nWhat will " + (myPokemon != null ? myPokemon.name : "you") + " do?");
+        txtLog.setFont(new java.awt.Font("Monospaced", java.awt.Font.BOLD, 16));
         
         scrollLog = new javax.swing.JScrollPane(txtLog); 
         
@@ -57,6 +58,13 @@ public class BattlePanel extends javax.swing.JPanel {
         } catch (Exception e) {
             this.setPreferredSize(new java.awt.Dimension(1280, 720)); 
         }
+        
+        try {
+            backgroundImage = ImageIO.read(getClass().getResourceAsStream("/images/BG_main.png"));
+            // logo = ImageIO.read(getClass().getResourceAsStream("/images/logo_pokemon.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // --- Adjust Positions ---
         lblEnemy.setBounds(800, 50, 350, 350); 
@@ -68,12 +76,25 @@ public class BattlePanel extends javax.swing.JPanel {
         pnlSkills.setVisible(false); 
     }
     
+     @Override
+    protected void paintComponent(java.awt.Graphics g) {
+        super.paintComponent(g);
+        
+        // Draw image first (so it is behind the buttons)
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, 1280, 720, null);
+            // g.drawImage(logo, 0, 0, 188 * 3, 105 * 3, this);
+        }
+    }
+    
     public void startBattle(Pokemon p1, Pokemon p2) {
         this.myPokemon = p1;
         this.enemy = p2;
         
         // Setup Party
         // System.out.println(gameM.player.myParty);
+        txtLog.removeAll();
+        txtLog.setText("Battle Start!\n------------------------------------------------\nWhat will " + (myPokemon != null ? myPokemon.name : "you") + " do?");
         updateGUI(); 
     }
 
@@ -137,6 +158,7 @@ public class BattlePanel extends javax.swing.JPanel {
         // --------------------------------
         
         enemy.takeDamage(finalDamage);
+        setButtonsEnabled(true);
         updateGUI(); 
         
         if (enemy.hp <= 0) {
@@ -400,6 +422,7 @@ public class BattlePanel extends javax.swing.JPanel {
         }
 
         myPokemon.takeDamage(damageToPlayer);
+        gameM.playSE(6);
         
         // --- Narrator ---
         log("Enemy " + enemy.name + " used " + skillName + "!");
@@ -409,10 +432,11 @@ public class BattlePanel extends javax.swing.JPanel {
         updateGUI();
 
         if (myPokemon.hp <= 0) {
+            gameM.playSE(5);
             log(myPokemon.name + " fainted... You blacked out.");
-            javax.swing.JOptionPane.showMessageDialog(this, "Game Over!");
-            gameM.player.myParty.remove(myPokemon);
-            System.exit(0);
+            javax.swing.JOptionPane.showMessageDialog(this, myPokemon.name + " fainted...");
+            myPokemon.hp = 0;
+            gameM.showMap();
         } else {
             setButtonsEnabled(true);
             log("------------------------------------------------"); 
@@ -429,6 +453,7 @@ public class BattlePanel extends javax.swing.JPanel {
 
     // --- Skill Menu ---
     private void showSkillMenu() {
+        gameM.playSE(4);
         jPanel1.setVisible(false);
         pnlSkills.setVisible(true); 
         
@@ -459,6 +484,11 @@ public class BattlePanel extends javax.swing.JPanel {
     }
 
     private void useSkill(int index) {
+        if (index > 1 ) {
+            gameM.playSE(7);
+        } else {
+            gameM.playSE(6);
+        }
         if (myPokemon.mySkills.size() > index) {
             Skill selectedSkill = myPokemon.mySkills.get(index);
             
@@ -500,6 +530,7 @@ public class BattlePanel extends javax.swing.JPanel {
     
     // --- Inventory System ---
     private void openBagMenu() {
+        gameM.playSE(4);
         java.util.List<GameItem> availableItems = new java.util.ArrayList<>();
         for (GameItem item : myBag) {
             if (item.quantity > 0) {
@@ -530,7 +561,7 @@ public class BattlePanel extends javax.swing.JPanel {
 
     private void useItem(GameItem item) {
         item.quantity--; 
-        
+        gameM.playSE(9);
         if (item.name.contains("Ball")) {
             tryToCatch(item.name); 
         } else {
@@ -579,12 +610,17 @@ public class BattlePanel extends javax.swing.JPanel {
     private void openPokemonMenu() {
         if (gameM.player.myParty.isEmpty()) return;
 
+        gameM.playSE(4);
+        
         Pokemon[] options = gameM.player.myParty.toArray(new Pokemon[0]);
         Pokemon selectedPoke = (Pokemon) javax.swing.JOptionPane.showInputDialog(
                 this, "Choose a Pokemon:", "Party",
                 javax.swing.JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
         if (selectedPoke != null) {
+            
+            gameM.playSE(8);
+            
             if (selectedPoke == myPokemon) {
                 javax.swing.JOptionPane.showMessageDialog(this, "This Pokemon is already battling!");
                 return;
