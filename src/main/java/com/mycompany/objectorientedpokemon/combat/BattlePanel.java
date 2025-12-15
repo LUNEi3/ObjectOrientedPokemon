@@ -174,7 +174,7 @@ public class BattlePanel extends javax.swing.JPanel {
         if (enemy.hp <= 0) {
             log(enemy.name + " fainted! You Win!"); 
             
-            int x = rand.nextInt(0, 5);
+            int x = rand.nextInt(0, 6);
             myBag.get(x).quantity++;
             
             javax.swing.JOptionPane.showMessageDialog(this, "You Win!" + "You got " + myBag.get(x).name);
@@ -651,6 +651,10 @@ public class BattlePanel extends javax.swing.JPanel {
             }
 
             myPokemon = selectedPoke;
+            
+            gameM.player.myParty.remove(myPokemon);
+            gameM.player.myParty.add(0, myPokemon);
+            
             updateGUI();
             updateSkillButtons(); 
             
