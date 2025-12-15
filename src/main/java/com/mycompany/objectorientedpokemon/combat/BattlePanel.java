@@ -10,6 +10,7 @@ import com.mycompany.objectorientedpokemon.entity.Pokemon;
 import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 import javax.imageio.ImageIO;
 /**
  *
@@ -21,6 +22,7 @@ public class BattlePanel extends javax.swing.JPanel {
     private GameManager gameM;
     
     private java.util.List<GameItem> myBag = new java.util.ArrayList<>();
+    private Random rand = new Random();
     private javax.swing.JTextArea txtLog;
     private javax.swing.JScrollPane scrollLog;
     private java.awt.image.BufferedImage backgroundImage;
@@ -35,6 +37,7 @@ public class BattlePanel extends javax.swing.JPanel {
         myBag.add(new GameItem("Poke Ball", 0, 5));      
         myBag.add(new GameItem("Ultra Ball", 0, 2));    
         myBag.add(new GameItem("Master Ball", 0, 1));   
+        myBag.add(new GameItem("Rare Candy", 0, 1));   
         // ---------------------
 
         // --- Create Narrator Box ---
@@ -93,6 +96,13 @@ public class BattlePanel extends javax.swing.JPanel {
         
         // Setup Party
         // System.out.println(gameM.player.myParty);
+        int i = 0;
+        while (myPokemon.hp == 0 && i < gameM.player.myParty.size()) {
+            myPokemon = gameM.player.myParty.get(i);
+            i++;
+        }
+        
+        setButtonsEnabled(true);
         txtLog.removeAll();
         txtLog.setText("Battle Start!\n------------------------------------------------\nWhat will " + (myPokemon != null ? myPokemon.name : "you") + " do?");
         updateGUI(); 
@@ -163,7 +173,11 @@ public class BattlePanel extends javax.swing.JPanel {
         
         if (enemy.hp <= 0) {
             log(enemy.name + " fainted! You Win!"); 
-            javax.swing.JOptionPane.showMessageDialog(this, "You Win!");
+            
+            int x = rand.nextInt(0, 5);
+            myBag.get(x).quantity++;
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "You Win!" + "You got " + myBag.get(x).name);
             gameM.showMap();
             return; 
         }
@@ -564,6 +578,12 @@ public class BattlePanel extends javax.swing.JPanel {
         gameM.playSE(9);
         if (item.name.contains("Ball")) {
             tryToCatch(item.name); 
+        } else if (item.name.contains("Candy")) {
+            String prevName = myPokemon.name;
+            myPokemon.evolution();
+            javax.swing.JOptionPane.showMessageDialog(this, prevName + " evoled into " + myPokemon.name + "!");
+            updateGUI();
+            
         } else {
             // Potion Logic
             if (myPokemon.hp >= myPokemon.maxHp) {

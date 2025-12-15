@@ -47,35 +47,38 @@ public class Pokemon {
         } catch(Exception e) {
             e.printStackTrace();
         }
-//        evolution();
-//        evolution(); 
         assignSkills();
         
     }
     
-    public Pokemon(String type) {
+    public Pokemon(String type, int targetForm) {
         this.form = 1;
         this.formImages = new ArrayList<>();
         this.names = new ArrayList<>();
         this.type = type;
         randomType();
         setup();
-        assignSkills();
         
-        this.hp = maxHp;
 
+        while (this.form < targetForm && this.form < names.size()) {
+            evolution();
+        }
+        assignSkills();
+        this.hp = maxHp;
     }
 
     public Pokemon(){
-        this("");
-        this.form = 1;
+        this("", 1);
     }
     
-    public void evolution() {
-        
+    public Pokemon(int form) {
+        this("", form);
+    }
+    
+    public void evolution() {   
         // Can't evole if reach max evolution form
         if (this.form >= names.size()) {
-            // System.out.println("This Pokemon can't evolution anymore. " + this.form);
+            //System.out.println("This Pokemon can't evolution anymore. " + this.form);
             return;
         }
         
@@ -215,8 +218,7 @@ public class Pokemon {
             System.out.println("Name is null!!!");
         }
         // Set current image
-        this.image = this.formImages.get(form);
-        
+        this.image = this.formImages.get(form - 1);
         
         // Random Status based on Type
         switch (this.type) {
